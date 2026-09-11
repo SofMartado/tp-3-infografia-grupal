@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VOCES AFANADAS - IA</title>
+
+    <link rel="stylesheet" href="index2.css">
+</head>
+<body>
+    <main>
+
+        <!-- ============================================================
+             INTRODUCCIÓN
+             Interacción: se hace click sobre el globo (o el indicador "...")
+             para ir avanzando entre los 5 globos de texto, uno a la vez.
+        ============================================================= -->
+        <section class="seccion seccion-intro" id="intro">
+            <div class="titulo">
+              <h1>Generación de voz con IA</h1>
+              <h2>clonación de voz</h2>
+            </div>
+
+            <div class="escena-dialogo" id="escena-intro">
+              <article class="bloque-info">
+                <!-- Los globos se generan por JS a partir de DATA_INTRO en script.js -->
+                <div class="info-section espacio globo-texto" id="globo-intro" aria-live="polite"></div>
+                <button type="button" class="indicador-siguiente" id="siguiente-intro" aria-label="Siguiente">
+                    <span class="puntos">· · ·</span>
+                </button>
+              </article>
+
+              <aside class="personaje-aside">
+                  <img src="img/img_micro-san/img_intro.png" alt="Micro-chan" class="img-personaje">
+              </aside>
+            </div>
+
+            <!-- LINEA DEL TIEMPO -->
+            <div class="bloque-lineaDeTiempo-wrap">
+                <h2 class="titulo-seccioncita">[línea del tiempo]</h2>
+
+                <!-- AVISO: se unificó todo en un solo bloque horizontal
+                     (contenedor con scroll horizontal si no entra en pantalla),
+                     con los ítems alternando arriba / abajo de la línea,
+                     tal como se ve en el video de referencia. -->
+                <div class="linea-tiempo" id="linea-tiempo">
+                    <!-- generado por JS a partir de DATA_TIMELINE -->
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================================================
+             NÚCLEO 1 — Cripto voces / El falso doblaje
+             Interacción: se elige uno de los 7 íconos -> se abre un panel
+             modal grande con el texto + imagen/video + botón de audio.
+             Se cierra con la X o clickeando fuera del panel.
+        ============================================================= -->
+        <section class="seccion seccion-nucleo1" id="nucleo1">
+            <div class="titulo">
+              <h1>Cripto voces</h1>
+              <h2>El falso doblaje</h2>
+            </div>
+
+            <div class="escena-nucleo1" id="escena-nucleo1">
+                <!-- personajes centrales -->
+                <img src="img/img_micro-san/img_nucleo_1.png" alt="Micro-chan junto a un estudiante, ambos sorprendidos"
+                     class="img-nucleo1-centro">
+
+                <!-- 7 burbujas-ícono generadas por JS a partir de DATA_ICONOS,
+                     distribuidas en círculo alrededor del centro -->
+                <div class="anillo-iconos" id="anillo-iconos"></div>
+            </div>
+
+            <!-- Modal / panel de información de cada ícono -->
+            <div class="modal-overlay" id="modal-icono" hidden>
+                <div class="modal-panel" role="dialog" aria-modal="true" aria-labelledby="modal-icono-titulo">
+                    <button type="button" class="modal-cerrar" id="modal-cerrar" aria-label="Cerrar">✕</button>
+
+                    <button type="button" class="btn-audio" id="btn-audio" aria-pressed="false">
+                        <span class="btn-audio-icono">🔊</span>
+                        <span class="btn-audio-texto">Habilitar audio</span>
+                    </button>
+
+                    <p class="modal-texto" id="modal-icono-titulo"></p>
+
+                    <div class="modal-media" id="modal-icono-media">
+                        <!-- imagen/video se inserta por JS -->
+                    </div>
+
+                    <!-- AVISO: no se recibieron los archivos de "img/graficos/",
+                         referenciados en el HTML original (img_1.png ... img_7.jpg).
+                         Se muestra un marcador de posición estilizado en su lugar;
+                         reemplazar data-media de cada ícono en script.js por la
+                         imagen o video real cuando esté disponible. -->
+                    <img class="modal-icono-esquina" id="modal-icono-esquina" src="" alt="">
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================================================
+             NÚCLEO 2 — Los riesgos jurídicos / La IA a juicio
+             Interacción: primero una animación en loop de "objeción",
+             después aparece la caja de diálogo de Micro-San sobre el
+             personaje, navegable con los triángulos izquierda/derecha.
+        ============================================================= -->
+        <section class="seccion seccion-nucleo2" id="nucleo2">
+            <div class="titulo">
+              <h1>Los riesgos jurídicos</h1>
+              <h2>La IA a juicio</h2>
+            </div>
+
+            <div class="escena-nucleo2" id="escena-nucleo2">
+                <div class="objecion-anim">
+                    <img src="img/img_micro-san/img_nucleo_2.png" alt="Micro-San señalando y objetando"
+                         class="img-nucleo2-personaje">
+                    <img src="img/img_micro-san/img_objecion.png" alt="¡Objeción!"
+                         class="img-objecion" id="img-objecion">
+                </div>
+
+                <!-- Caja de diálogo -->
+                <div class="caja-dialogo" id="caja-dialogo">
+                    <button type="button" class="flecha flecha-izq" id="dialogo-anterior" aria-label="Anterior" disabled>◀</button>
+
+                    <div class="caja-dialogo-contenido">
+                        <span class="etiqueta-hablante">Micro-San</span>
+                        <h3 class="dialogo-titulo" id="dialogo-titulo"></h3>
+                        <p class="dialogo-texto" id="dialogo-texto"></p>
+                    </div>
+
+                    <button type="button" class="flecha flecha-der" id="dialogo-siguiente" aria-label="Siguiente">▶</button>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>

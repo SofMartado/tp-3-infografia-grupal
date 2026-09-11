@@ -1,0 +1,572 @@
+:root {
+
+  /* === COLORES === */
+  --color-primario:     #B14AED;   /* nubes de fondo + cajas de texto,etc*/
+  --color-secundario:   #2E1A63;   /* nubes de fondo */
+  --color-terciario:   #5B2A86;   /* nubes de fondo */
+  --color-acento:      #F24822;   /*  #F5A623 botones,links,iconos */
+  --color-fondo:        #12163A;   /* fondo global */
+  --color-texto:        #1C1C2E;   /* texto principal */
+  --color-texto-suave:  #6B6B8A;   /* texto secundario */
+ --color-blanco:        #DBDBDB;   /* texto secundario,para fondos oscuros */
+
+
+  /* === TIPOGRAFÍA === */
+  --fuente-principal:   Georgia, serif;
+  --fuente-interfaz:    system-ui, sans-serif;
+  --fuente-codigo:      'Courier New', monospace;
+
+
+  --tamaño-xs:  12px;
+  --tamaño-sm:  14px;
+  --tamaño-base:16px;
+  --tamaño-lg:  24px;
+  --tamaño-xl:  32px;
+
+
+  /* === ESPACIADO — regla del 8 === */
+  --espacio-xs:  4px;
+  --espacio-sm:  8px;
+  --espacio-md: 16px;
+  --espacio-lg: 32px;
+  --espacio-xl: 64px;
+
+  /* === NUEVAS VARIABLES (agregadas para las interacciones) ===
+     No estaban en el archivo original; se documentan acá para que
+     queden claras las decisiones nuevas de diseño. */
+  --color-fondo-panel:  #1B2050;   /* NUEVO: paneles/tarjetas sobre el fondo global */
+  --color-fondo-modal:  rgba(10, 12, 34, 0.82); /* NUEVO: backdrop del modal */
+  --color-blanco-fuerte:#F5F4FA;   /* NUEVO: blanco puro para títulos sobre fondo oscuro */
+  --radio-sm:   8px;               /* NUEVO: radio de borde chico */
+  --radio-md:   16px;              /* NUEVO: radio de borde mediano */
+  --radio-globo:24px;              /* NUEVO: radio del globo de diálogo */
+  --sombra-panel: 0 20px 60px rgba(0,0,0,0.45); /* NUEVO */
+  --duracion-transicion: 220ms;    /* NUEVO */
+  --ancho-contenido: 1180px;       /* NUEVO: ancho máximo de contenido centrado */
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+
+body,main{
+    background-color: var(--color-fondo);
+    margin: 0;
+    padding: 0;
+}
+
+body{
+    font-family: var(--fuente-interfaz);
+    color: var(--color-blanco);
+    overflow-x: hidden;
+}
+
+h1, h2, h3 { font-family: var(--fuente-principal); margin: 0; }
+
+/* === Fondo con "nubes" (círculos) reutilizable en cada sección === */
+.seccion{
+    position: relative;
+    overflow: hidden;
+    padding: 0px;
+    isolation: isolate;
+}
+/*
+padding: var(--espacio-xl) var(--espacio-lg);
+*/
+
+.seccion::before,
+.seccion::after{
+    content: "";
+    position: absolute;
+    z-index: -1;
+    border-radius: 50%;
+    background: var(--color-primario);
+    opacity: 0.35;
+    filter: blur(1px);
+}
+
+.seccion::before{
+    width: 380px; height: 380px;
+    top: -140px; left: -140px;
+    background: var(--color-primario);
+}
+
+.seccion::after{
+    width: 280px; height: 280px;
+    bottom: -120px; right: -100px;
+    background: var(--color-terciario);
+    opacity: 0.45;
+}
+
+.titulo{
+    text-align: center;
+    color: var(--color-blanco);
+    margin-bottom: var(--espacio-lg);
+    position: relative;
+    z-index: 1;
+    margin: 50px;
+}
+
+.titulo h1{
+    font-size: var(--tamaño-xl);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--color-blanco-fuerte);
+}
+
+.titulo h2{
+    font-size: var(--tamaño-lg);
+    color: var(--color-blanco);
+    font-weight: normal;
+    margin-top: var(--espacio-xs);
+    text-transform: uppercase;
+}
+
+/* =============================================================
+   INTRODUCCIÓN — diálogo + personaje
+============================================================= */
+.escena-dialogo{
+    display: grid;
+    grid-template-columns: 1fr auto;
+    align-items: center;
+    gap: var(--espacio-lg);
+    max-width: var(--ancho-contenido);
+    margin: 10px 100px 10px 20px;
+    position: relative;
+    z-index: 1;
+}
+
+.bloque-info{
+    position: relative;
+    padding: 30px 20px 40px 20px;
+    margin: 30px 20px 40px 200px;
+    width: 100%;
+    max-width: 460px;
+    min-height: 90px;
+    background-color: var(--color-acento);
+    border-radius: var(--radio-globo);
+    /* "cola" de globo de diálogo apuntando al personaje */
+    clip-path: none;
+}
+
+.bloque-info::after{
+    /* triángulo/cola del globo, apuntando hacia el personaje a la derecha */
+    content: "";
+    position: absolute;
+    right: -22px;
+    bottom: 28px;
+    width: 0; height: 0;
+    border-top: 14px solid transparent;
+    border-bottom: 14px solid transparent;
+    border-left: 26px solid var(--color-acento);
+}
+
+.info-section {
+    text-align: justify;
+    display: block;
+    background-color: transparent;
+    color: var(--color-blanco);
+}
+
+.espacio {
+    margin-top: 2px;
+    margin-bottom: 2px;
+    margin-left: 5px ;
+    margin-right: 5px ;
+    padding: 5px;
+}
+
+.globo-texto{
+    min-height: 3.2em;
+    font-size: var(--tamaño-base);
+    line-height: 1.5;
+    transition: opacity var(--duracion-transicion) ease;
+}
+.globo-texto.saliendo{
+ opacity: 0; 
+}
+
+.indicador-siguiente{
+    position: absolute;
+    right: var(--espacio-md);
+    bottom: var(--espacio-sm);
+    background: none;
+    border: none;
+    color: var(--color-blanco);
+    cursor: pointer;
+    padding: var(--espacio-xs) var(--espacio-sm);
+}
+.indicador-siguiente .puntos{
+    font-size: var(--tamaño-lg);
+    letter-spacing: 2px;
+    animation: parpadeo 1.4s infinite;
+}
+.indicador-siguiente:disabled{ display:none; }
+
+@keyframes parpadeo{
+    0%, 100% { opacity: 0.35; }
+    50% { opacity: 1; }
+}
+
+.personaje-aside{ display:flex; justify-content:center; }
+.img-personaje{ width: 220px; height: auto; }
+
+/* =============================================================
+   LÍNEA DEL TIEMPO — todo en un único bloque horizontal
+============================================================= */
+.bloque-lineaDeTiempo-wrap{
+    max-width: var(--ancho-contenido);
+    margin: var(--espacio-xl) auto 0;
+    position: relative;
+    z-index: 1;
+}
+
+.titulo-seccioncita{
+    text-align: center;
+    color: var(--color-blanco-fuerte);
+    margin-bottom: var(--espacio-lg);
+    font-size: var(--tamaño-lg);
+}
+
+.linea-tiempo{
+    display: flex;
+    align-items: center;
+    gap: var(--espacio-sm);
+    overflow-x: auto;
+    border-radius: var(--radio-md);
+    margin: 0px 50px 0px 50px;
+}
+
+/*
+    padding: var(--espacio-xl) var(--espacio-md);
+    background: var(--color-fondo-panel);
+*/
+
+.linea-tiempo-item{
+    position: relative;
+    flex: 1 0 200px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* la "mecha" horizontal tipo forma de onda de audio, hecha con CSS */
+.linea-tiempo-item::before{
+    content:"";
+    display:block;
+    width: 100%;
+    height: 34px;
+    margin: 100px 50px 0px 50px;
+    background-image: repeating-linear-gradient(
+        to right,
+        var(--color-acento) 0 2px,
+        transparent 2px 6px
+    );
+    background-position: center;
+    background-repeat: repeat-x;
+    background-size: 6px 60%, 6px 100%, 6px 40%;
+    mask-image: linear-gradient(black, black);
+}
+
+/*
+margin: var(--espacio-sm) 0;
+*/
+
+.linea-tiempo-caja{
+    background: var(--color-primario);
+    color: var(--color-blanco-fuerte);
+    padding: var(--espacio-sm) var(--espacio-md);
+    border-radius: var(--radio-sm);
+    font-size: var(--tamaño-xs);
+    line-height: 1.4;
+    text-align: left;
+    max-width: 220px;
+}
+
+.linea-tiempo-item.arriba{ justify-content: flex-end; }
+.linea-tiempo-item.arriba .linea-tiempo-caja{ order: -1; margin-bottom: var(--espacio-sm); }
+.linea-tiempo-item.abajo  .linea-tiempo-caja{ margin-top: var(--espacio-sm); }
+
+/* =============================================================
+   NÚCLEO 1 — anillo de íconos + modal
+============================================================= */
+.escena-nucleo1{
+    position: relative;
+    max-width: 900px;
+    height: 560px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1;
+}
+
+.img-nucleo1-centro{
+    width: min(60%, 420px);
+    height: auto;
+    z-index: 2;
+    position: relative;
+}
+
+.anillo-iconos{
+    position: absolute;
+    inset: 0;
+}
+
+.icono-burbuja{
+    --desplazamiento-x: -50%;
+    --desplazamiento-y: 0%;
+    position: absolute;
+    width: 110px;
+    height: 110px;
+    border-radius: 50%;
+    background: var(--color-secundario);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: none;
+    cursor: pointer;
+    padding: var(--espacio-sm);
+    transition: transform 220ms ease, box-shadow 220ms ease, filter 220ms ease;
+    transform: translate(var(--desplazamiento-x), var(--desplazamiento-y));
+    box-shadow: 0 8px 20px var(--color-fondo);
+}
+.icono-burbuja:hover,
+.icono-burbuja:focus-visible{
+    transform: translate(var(--desplazamiento-x), var(--desplazamiento-y)) scale(1.22) translateY(-4px);
+    box-shadow: 0px 5px 10px var(--color-primario);
+    filter: brightness(1.08);
+}
+.icono-burbuja img{
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    transition: transform 220ms ease;
+}
+.icono-burbuja:hover img,
+.icono-burbuja:focus-visible img{
+    transform: scale(1.08);
+}
+
+/* posiciones en círculo alrededor del centro (7 íconos) */
+.icono-burbuja[data-pos="0"]{ top: 2%;  left: 50%; --desplazamiento-x: -50%; --desplazamiento-y: 0%; }
+.icono-burbuja[data-pos="1"]{ top: 18%; left: 88%; --desplazamiento-x: -50%; --desplazamiento-y: 0%; }
+.icono-burbuja[data-pos="2"]{ top: 50%; left: 96%; --desplazamiento-x: -50%; --desplazamiento-y: -50%; }
+.icono-burbuja[data-pos="3"]{ top: 82%; left: 82%; --desplazamiento-x: -50%; --desplazamiento-y: -100%; }
+.icono-burbuja[data-pos="4"]{ top: 90%; left: 22%; --desplazamiento-x: -50%; --desplazamiento-y: -100%; }
+.icono-burbuja[data-pos="5"]{ top: 55%; left: 4%;  --desplazamiento-x: -50%; --desplazamiento-y: -50%; }
+.icono-burbuja[data-pos="6"]{ top: 18%; left: 12%; --desplazamiento-x: -50%; --desplazamiento-y: 0%; }
+
+.modal-overlay{
+    position: fixed;
+    inset: 0;
+    background: var(--color-fondo-modal);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 100;
+    padding: var(--espacio-lg);
+}
+.modal-overlay[hidden]{ display: none; }
+
+.modal-panel{
+    position: relative;
+    background: var(--color-fondo-panel);
+    border-radius: var(--radio-md);
+    max-width: 760px;
+    width: 100%;
+    max-height: 85vh;
+    overflow-y: auto;
+    padding: var(--espacio-xl) var(--espacio-lg) var(--espacio-lg);
+    box-shadow: var(--sombra-panel);
+}
+
+.modal-cerrar{
+    position: absolute;
+    top: var(--espacio-md);
+    right: var(--espacio-md);
+    background: var(--color-acento);
+    color: var(--color-blanco-fuerte);
+    border: none;
+    width: 34px; height: 34px;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: var(--tamaño-base);
+    line-height: 1;
+}
+
+.btn-audio{
+    position: absolute;
+    top: var(--espacio-md);
+    left: var(--espacio-md);
+    display: flex;
+    align-items: center;
+    gap: var(--espacio-xs);
+    background: var(--color-primario);
+    color: var(--color-blanco-fuerte);
+    border: none;
+    border-radius: 999px;
+    padding: var(--espacio-xs) var(--espacio-md);
+    cursor: pointer;
+    font-size: var(--tamaño-xs);
+}
+.btn-audio[aria-pressed="true"]{ background: var(--color-acento); }
+
+.modal-texto{
+    font-size: var(--tamaño-lg);
+    line-height: 1.5;
+    color: var(--color-blanco-fuerte);
+    margin-top: var(--espacio-md);
+}
+
+.modal-media{
+    margin-top: var(--espacio-md);
+    border-radius: var(--radio-sm);
+    overflow: hidden;
+    min-height: 220px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    background: linear-gradient(135deg, var(--color-terciario), var(--color-secundario));
+}
+.modal-media img, .modal-media video{
+    width: 100%;
+    height: auto;
+    display: block;
+}
+.modal-media .placeholder-texto{
+    color: var(--color-blanco);
+    font-size: var(--tamaño-xs);
+    text-align: center;
+    padding: var(--espacio-lg);
+    opacity: 0.75;
+}
+
+.modal-icono-esquina{
+    position: absolute;
+    bottom: var(--espacio-md);
+    right: var(--espacio-md);
+    width: 64px;
+    height: 64px;
+    object-fit: contain;
+    opacity: 0.9;
+}
+
+/* =============================================================
+   NÚCLEO 2 — animación de objeción + caja de diálogo
+============================================================= */
+.escena-nucleo2{
+    max-width: var(--ancho-contenido) auto;
+    margin: 0 auto;
+    position: relative;
+    z-index: 1;
+}
+
+.objecion-anim{
+    position: relative;
+    display: flex;
+    justify-content: left;
+    min-height: 260px;
+    margin: 0px 100px 0px 100px;
+}
+
+.img-nucleo2-personaje{
+    width: 520px;
+    height: 400px;
+    animation: inclinar 2.6s ease-in-out infinite;
+    transform-origin: left;
+}
+
+.img-objecion{
+    position: absolute;
+    top: -10px;
+    left: 50%;
+    width: 50%;
+    height: 100%;
+    animation: aparecer-objecion 2.6s ease-in-out infinite;
+}
+
+@keyframes inclinar{
+    0%, 100% { transform: rotate(0deg); }
+    50% { transform: rotate(-3deg); }
+}
+
+@keyframes aparecer-objecion{
+    0%   { opacity: 0; transform: scale(0.6) translateY(10px); }
+    15%  { opacity: 1; transform: scale(1) translateY(0); }
+    70%  { opacity: 1; transform: scale(1) translateY(0); }
+    85%  { opacity: 0; transform: scale(0.9) translateY(-6px); }
+    100% { opacity: 0; }
+}
+
+@media (prefers-reduced-motion: reduce){
+    .img-nucleo2-personaje, .img-objecion{ animation: none; }
+}
+
+.caja-dialogo{
+    margin-top: var(--espacio-lg) var(--espacio-lg);
+    height: 160px;
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    align-items: stretch;
+    background-color: black;
+    border-radius: var(--radio-md);
+    overflow: hidden;
+}
+
+.caja-dialogo-contenido{
+    padding: 0px var(--espacio-lg) var(--espacio-lg) var(--espacio-lg);
+    position: relative;
+}
+
+.etiqueta-hablante{
+    display: inline-block;
+    background: var(--color-acento);
+    color: var(--color-blanco-fuerte);
+    font-weight: bold;
+    padding: var(--espacio-xs) var(--espacio-md);
+    border-radius: var(--radio-sm);
+    margin-bottom: var(--espacio-md);
+}
+
+.dialogo-titulo{
+    font-family: var(--fuente-interfaz);
+    text-transform: uppercase;
+    font-size: var(--tamaño-base);
+    color: var(--color-blanco-fuerte);
+    margin-bottom: var(--espacio-sm);
+}
+
+.dialogo-texto{
+    font-size: var(--tamaño-base);
+    line-height: 1.6;
+    color: var(--color-blanco);
+    margin: 0;
+}
+
+.flecha{
+    background: rgba(255,255,255,0.06);
+    border: none;
+    color: var(--color-blanco);
+    font-size: var(--tamaño-lg);
+    cursor: pointer;
+    padding: 0 var(--espacio-md);
+    transition: background var(--duracion-transicion) ease, color var(--duracion-transicion) ease;
+}
+.flecha:hover:not(:disabled){ background: var(--color-acento); color: var(--color-blanco-fuerte); }
+.flecha:disabled{ opacity: 0.25; cursor: default; }
+
+/* =============================================================
+   RESPONSIVE
+============================================================= */
+@media (max-width: 760px){
+    .escena-dialogo{ grid-template-columns: 1fr; }
+    .personaje-aside{ order: -1; }
+    .bloque-info::after{ display: none; }
+    .escena-nucleo1{ height: 640px; }
+    .img-nucleo1-centro{ width: 50%; }
+    .icono-burbuja{ width: 78px; height: 78px; }
+    .caja-dialogo{ grid-template-columns: auto 1fr auto; }
+    .img-objecion{ width: 180px; left: 60%; }
+}
+
+/* Accesibilidad: foco visible en toda la página */
+:focus-visible{ outline: 2px solid var(--color-acento); outline-offset: 2px; }

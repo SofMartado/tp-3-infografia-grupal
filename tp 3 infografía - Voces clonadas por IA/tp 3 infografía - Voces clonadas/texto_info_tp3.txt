@@ -1,0 +1,140 @@
+Infografía TP3 VOZ CON IA
+-------------------
+INTRODUCCIÓN
+
+[título]
+Generación de voz con IA
+
+[subtitulo]
+clonación de voz
+
+//////////////////
+
+[texto de Micro-san(personaje)]
+
+[1er globo]
+Hola,soy Micro-chan. Te voy a acompañar en ésta trayectoria.
+
+[2do globo]
+La clonación de voz es una tecnología de inteligencia artificial que crea una réplica digital exacta de la voz de una persona a partir de una muestra de audio
+
+[3er globo]
+Se ha utilizado ampliamente en el doblaje de vídeos, la localización, el marketing, la educación y los flujos de trabajo de los creadores.
+
+[4to globo]
+Esta tecnología se ha visto envuelta en polémicas y problemas legales desde el comienzo de su desarrollo e implementación en los diferentes medios, generando dudas sobre si su uso es moralmente correcto.
+
+[5to globo]
+Hay mucha información por explorar así que mandale :D
+
+//////////////////
+
+[Línea del tiempo]
+
+[1er párrafo]
+(1990 y 2000): Los programas utilizaban la concatenación, es decir, unían fragmentos de palabras grabadas previamente por un locutor. El resultado sonaba robótico y requería horas de grabación
+
+[2do párrafo]
+(2016 WaveNet): DeepMind presentó WaveNet, un modelo generativo de audio basado en aprendizaje profundo que cambió la forma de sintetizar ondas sonoras
+
+[3er párrafo]
+(2017 Tacotron): Google lanzó Tacotron, un sistema que transformaba texto directamente en espectrogramas de audio, logrando una entonación mucho más natural.
+
+[4to párrafo]
+(2018–2019): Surgieron redes neuronales especializadas en extraer características únicas de un hablante a partir de minutos de voz para aplicarlas a nuevos textos
+
+[5to párrafo]
+(2020–2022) Los sistemas comenzaron a integrar codificadores y sintetizadores en una sola red neuronal (como el modelo VITS) y Las herramientas de clonación empezaron a comercializarse para la industria del entretenimiento y la accesibilidad
+
+[6to párrafo]
+Actualidad (2026): VALL-E / ElevenLabs
+cuenta con sistemas de tipo zero-shot que necesitan apenas 3 segundos de audio para lograr una coincidencia de voz superior al 85 %, lo que desdibuja la línea entre una voz real y una artificial.
+
+
+-------------------
+NÚCLEO 1
+[título]
+Cripto voces
+
+[subtitulo]
+El falso doblaje
+
+//////////////////
+
+[ICON 1]
+La Ley ELVIS  de Tennessee  aprobada en 2024 para salvaguardar la industria de la música de Nashville, fue la primera ley en el mundo en elevar la voz humana al estatus de un derecho de propiedad explícito, heredable y asegurable.
+
+[ICON 2]
+La industria mundial del doblaje vive uno de sus mejores momentos impulsada por la expansión de las plataformas de streaming. Sin embargo, el crecimiento del sector convive con un nuevo desafío: el avance de la inteligencia artificial y la utilización de voces clonadas para reemplazar a actores y locutores.
+
+[ICON 3]
+A nivel global, diversos países y bloques regionales han comenzado a implementar leyes y medidas estrictas para combatir la clonación de voz sin consentimiento.
+
+[ICON 4]
+Actores de todo el mundo han participado en manifestaciones contra la clonación de voz exigiendo la protección jurídica de su voz como elemento de identidad personal.
+
+[ICON 5]
+En los últimos tiempos, se han comenzado a ver más casos de usuarios o empresas de inteligencia artificial que toman la voz de actores sin consentimiento, resultando en problemas legales.
+
+[ICON 6]
+La Unión Europea instauró la Ley de Inteligencia Artificial que regula el uso de la tecnología en todos los ámbitos según su nivel de riesgo, incluyendo la clonación de voz y los derechos de autor envueltos en ella. Obliga penalmente a los desarrolladores de software a incrustar marcas de agua digitales en los clones de voz.
+
+[ICON 7]
+Se calcula que el 30% de los doblajes ya se hacen con procesos de clonación de voces.
+
+-------------------
+NÚCLEO 2
+[título]
+Los riesgos Jurídicos
+
+[subtitulo]
+La IA a juicio
+
+//////////////////
+
+[Micro-san habla]
+
+[diag.1]
+1.Derechos de autor y propiedad intelectual
+La voz de una persona no siempre goza de la misma protección que una canción, un guión, una imagen o una interpretación grabada.
+
+[diag.2]
+1.Derechos de autor y propiedad intelectual
+Sin embargo, clonar o utilizar la voz de alguien sin permiso puede suponer un riesgo legal en virtud de los derechos de publicidad, las leyes de privacidad, las normas de protección del consumidor, las condiciones contractuales, las normas de competencia desleal, las políticas de las plataformas y la ley de derechos de autor, si la grabación original o el contenido final incluye material protegido por derechos de autor.
+
+[diag.3]
+1.Derechos de autor y propiedad intelectual
+Las voces de personajes famosos y de gran notoriedad requieren un cuidado especial. Aunque una voz generada no se haya copiado de una grabación sonora protegida, el uso de una voz que se parezca a la de una persona reconocible puede plantear problemas relacionados con el derecho de imagen, el respaldo falso, el engaño al consumidor y las políticas de la plataforma. 
+
+[diag.4] 
+2.Difamación y uso legítimo
+Las voces clonadas pueden utilizarse indebidamente y, en muchos casos, acaban perjudicando la reputación de una persona. 
+
+[diag.5]
+2.Difamación y uso legítimo
+Por lo tanto, tanto si está considerando la clonación de voces para su proyecto de locución de IA como si lo hace con fines de entretenimiento, asegúrese de comprender y evitar el riesgo de difamación.
+
+[diag.6]
+2.Difamación y uso legítimo
+El uso legítimo depende de las circunstancias concretas y no debe considerarse un permiso general para la clonación de voces. 
+
+[diag.7]
+2.Difamación y uso legítimo
+El uso comercial, los anuncios, el contenido de pago o el contenido que implique un respaldo suelen suponer un mayor riesgo, especialmente cuando la voz es reconocible. 
+
+[diag.8]
+2.Difamación y uso legítimo
+Incluso si un proyecto es un comentario, una parodia, tiene fines educativos o está relacionado con las noticias, debes evaluar el consentimiento, la divulgación, los derechos del audio original, las políticas de la plataforma y las leyes locales sobre derechos de publicidad.
+
+[diag.9]
+3.Consentimiento y privacidad
+Antes de clonar la voz de alguien, asegúrate de pedir permiso explícito. Esto se aplica a todo lo que incluya la generación de la voz de otra persona. 
+
+[diag.10]
+3.Consentimiento y privacidad
+El uso no autorizado de la voz puede acarrear consecuencias legales. Cuando te plantees clonar la voz, asegúrate de ser transparente sobre tu intención de utilizar esta voz modificada. 
+
+[diag.11]
+3.Consentimiento y privacidad
+Asegúrese de informar a las partes pertinentes sobre las herramientas que utilizará para la clonación de voz y dónde se utilizarán estas voces clonadas.
+-------------------

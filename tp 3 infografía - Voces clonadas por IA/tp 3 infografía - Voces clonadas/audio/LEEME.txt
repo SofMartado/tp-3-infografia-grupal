@@ -1,0 +1,14 @@
+Poné acá los 7 archivos de audio de Núcleo 1, con estos nombres exactos
+(mismo criterio que usan icon_1.png y img_1.jpg):
+
+audio_1.mp3  -> Ícono 1 (Ley ELVIS)
+audio_2.mp3  -> Ícono 2 (industria del doblaje)
+audio_3.mp3  -> Ícono 3 (leyes globales)
+audio_4.mp3  -> Ícono 4 (manifestaciones de actores)
+audio_5.mp3  -> Ícono 5 (uso sin consentimiento)
+audio_6.mp3  -> Ícono 6 (Ley de IA de la UE)
+audio_7.mp3  -> Ícono 7 (30% de doblajes con clonación)
+
+Formato recomendado: .mp3 (también funciona .ogg o .wav, pero ahí hay
+que cambiar la extensión en el campo "audio" de cada ítem en script.js,
+por ejemplo: audio: "audio/audio_1.ogg")
