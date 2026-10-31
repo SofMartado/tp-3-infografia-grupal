@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Trivia — Voces Afanadas</title>
+<link rel="stylesheet" href="pantalla.css">
+<link rel="stylesheet" href="trivia.css">
+</head>
+<body class="pantalla-completa pagina-trivia">
+
+  <div class="escena escena-trivia" id="app-trivia" data-vista="intro">
+
+    <!-- Fondos (uno por pantalla) -->
+    <div class="trivia-fondo fondo-intro" aria-hidden="true"></div>
+    <div class="trivia-fondo fondo-juego" aria-hidden="true"></div>
+
+    <!-- Ilustraciones: se ven como recuadro punteado hasta que agregues la imagen -->
+    <div class="trivia-personaje personaje-intro marco-imagen" data-placeholder="personaje intro (img/trivia/personaje-intro.png)"><img src="img/trivia/personaje-juego.png" alt="Micro-chan"></div>
+    <div class="trivia-personaje personaje-juego marco-imagen" data-placeholder="personaje (img/trivia/personaje-juego.png)"><img src="img/trivia/personaje-juego.png" alt="Micro-chan"></div>
+
+    <!-- Encabezado: micrófono + píldora "Trivia" (volver), misma posición que el de Noti-Zam -->
+    <header class="trivia-header">
+      <div class="trivia-microfono marco-imagen" data-placeholder="micrófono (img/trivia/microfono.png)"><img src="img/trivia/microfono.png" alt=""></div>
+      <button type="button" class="trivia-pill" id="trivia-pill" title="Volver">
+      <span class="trivia-pill-circulo" aria-hidden="true">
+        <svg viewBox="0 0 24 24"><path d="M20 12H5M11 5l-7 7 7 7" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </span>
+      <span>Trivia</span>
+      </button>
+    </header>
+
+    <!-- PANTALLA 1: intro -->
+    <section class="trivia-vista" id="vista-intro">
+      <button type="button" class="trivia-intro" id="trivia-intro">¿Cuánto sabes acerca de la clonación de voz?</button>
+    </section>
+
+    <!-- PANTALLAS 2 y 3: pregunta con audio / imagen fija con el audio de la respuesta -->
+    <section class="trivia-vista" id="vista-juego" hidden>
+
+      <div class="trivia-tarjeta" id="tarjeta-audio">
+        <p class="trivia-pregunta" id="trivia-pregunta"></p>
+        <div class="trivia-reproductor">
+          <button type="button" class="trivia-play" id="trivia-play" aria-label="Reproducir audio">
+            <svg class="icono-play" viewBox="0 0 24 24"><path d="M7 4.5v15l12-7.5z" fill="none" stroke="#17101f" stroke-width="2.4" stroke-linejoin="round"/></svg>
+            <svg class="icono-pausa" viewBox="0 0 24 24" hidden><path d="M8 5v14M16 5v14" stroke="#17101f" stroke-width="3" stroke-linecap="round"/></svg>
+          </button>
+          <div class="trivia-ondas" id="trivia-ondas" role="slider" aria-label="Progreso del audio">
+            <span class="trivia-cabezal" id="trivia-cabezal"></span>
+          </div>
+        </div>
+      </div>
+
+      <div class="trivia-imagen marco-imagen" id="tarjeta-imagen" data-placeholder="" hidden>
+        <img id="trivia-imagen" alt="">
+        <span class="trivia-etiqueta" id="trivia-etiqueta"></span>
+      </div>
+
+      <button type="button" class="trivia-siguiente" id="trivia-siguiente" aria-label="Siguiente" hidden>
+        <svg viewBox="0 0 24 24"><path d="M4 12h15M13 5l7 7-7 7" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </button>
+
+      <!-- Personaje con diálogo según la respuesta -->
+<img
+  id="trivia-personaje-respuesta"
+  class="trivia-respuesta-personaje"
+  src=""
+  alt="Micro-chan dando una devolución"
+  hidden
+>
+
+      <button type="button" class="trivia-opcion" id="opcion-real" data-opcion="real">real</button>
+      <button type="button" class="trivia-opcion" id="opcion-clonada" data-opcion="clonada">clonada</button>
+    </section>
+
+    <!-- PANTALLA FINAL: cuántas acertó -->
+    <section class="trivia-vista" id="vista-resultado" hidden>
+      <div class="trivia-resultado">
+        <p class="trivia-resultado-titulo" id="resultado-titulo"></p>
+        <p class="trivia-resultado-texto" id="resultado-texto"></p>
+      </div>
+      <button type="button" class="trivia-opcion" id="trivia-inicio">Inicio</button>
+    </section>
+
+    <audio id="trivia-audio" preload="auto"></audio>
+    <audio id="trivia-audio-respuesta" preload="auto"></audio>
+  </div>
+
+  <script src="trivia.js"></script>
+</body>
+</html>

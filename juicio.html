@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>¡Juicio! — Voces Afanadas</title>
+<link rel="stylesheet" href="pantalla.css">
+<link rel="stylesheet" href="juicio.css">
+</head>
+<body class="pantalla-completa pagina-juicio">
+
+  <div class="escena escena-juicio" id="app-juicio" data-vista="opciones">
+
+    <!-- Encabezado: micrófono + píldora, misma posición/tamaño que en Noti-Zam y Trivia -->
+    <header class="juicio-header">
+      <div class="juicio-microfono marco-imagen" data-placeholder="micrófono (img/juicio/microfono.png)"><img src="img/juicio/microfono.png" alt=""></div>
+      <button type="button" class="juicio-pill" id="juicio-pill" title="Volver">
+        <span class="juicio-pill-circulo" aria-hidden="true">
+          <svg viewBox="0 0 24 24"><path d="M20 12H5M11 5l-7 7 7 7" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </span>
+        <span id="juicio-pill-texto">¡Juicio!</span>
+      </button>
+    </header>
+
+    <!-- PANTALLA 0: elegir uno de los 3 temas -->
+    <section class="juicio-vista" id="vista-opciones">
+      <div class="juicio-fondo-opciones marco-imagen" data-placeholder="ilustración de fondo (img/juicio/fondo-opciones.png)">
+        <img src="img/juicio/fondo-opciones.png" alt="">
+      </div>
+      <!-- Los 3 textos se completan solos desde TEMAS, en juicio.js -->
+      <button type="button" class="juicio-tema" id="tema-0" data-tema="0"></button>
+      <button type="button" class="juicio-tema" id="tema-1" data-tema="1"></button>
+      <button type="button" class="juicio-tema" id="tema-2" data-tema="2"></button>
+    </section>
+
+    <!-- PANTALLA 01-tema1: pantalla roboti-noti presentando el caso + botón final -->
+     <button
+  type="button"
+  class="juicio-flecha-manual"
+  id="juicio-flecha-manual"
+  aria-label="Avanzar a la siguiente pantalla"
+  hidden>
+    </button>
+
+    <!-- PANTALLA 2: animación de frames del tema elegido + botón final -->
+    <section class="juicio-vista" id="vista-animacion" hidden>
+      <div class="juicio-frame marco-imagen" id="juicio-frame" data-placeholder="">
+        <img id="juicio-frame-img" alt="">
+      </div>
+
+      <!-- Bifurcación (solo la usa el tema que la tenga configurada en TEMAS, juicio.js):
+           dos burbujas para elegir; según cuál se toque, la animación sigue por una
+           rama distinta. Ocultas hasta que la animación llega a ese punto. -->
+      <button type="button" class="juicio-bifurcacion marco-imagen" id="juicio-opcion-0" data-opcion="0" hidden><img alt=""></button>
+      <button type="button" class="juicio-bifurcacion marco-imagen" id="juicio-opcion-1" data-opcion="1" hidden><img alt=""></button>
+      <button type="button" class="juicio-flecha-manual" id="juicio-flecha-manual" aria-label="Avanzar a la siguiente pantalla" title="Continuar" hidden></button>
+      <button type="button" class="juicio-fin" id="juicio-fin" hidden>¡Fin del Juicio!</button>
+    </section>
+
+  </div>
+
+  <script src="juicio.js"></script>
+</body>
+</html>

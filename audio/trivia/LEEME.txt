@@ -1,0 +1,7 @@
+Audios de la Trivia (uno por parte, 1 a 5):
+  audio_N.mp3       el audio de la pregunta (el que hay que adivinar si es real o clonado)
+  respuesta_N.mp3   el audio contrario que suena al elegir: si audio_N es clonado, este es el real (y la etiqueta dice "Real"); si audio_N es real, este es el clonado
+Imágenes en img/trivia/:
+  respuesta_N.png   la imagen fija que se ve en el cuadro al elegir
+  fondo-intro.png, fondo-juego.png, microfono.png, personaje-intro.png, personaje-juego.png, burbujas.png
+Los nombres, textos y respuestas (real / clonada) se editan en la lista PARTES de trivia.js

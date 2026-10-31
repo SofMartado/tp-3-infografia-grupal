@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Noti-Zam — Voces Afanadas</title>
+<link rel="stylesheet" href="pantalla.css">
+<link rel="stylesheet" href="noti-zam.css">
+</head>
+<body class="pantalla-completa pagina-notizam">
+
+  <div class="escena escena-notizam" id="app-notizam">
+
+    <div class="notizam-fondo" aria-hidden="true"></div>
+
+    <header class="notizam-header">
+      <a href="index.html" class="notizam-logo marco-imagen" data-placeholder="logo (img/noticias/logo.png)">
+        <img src="img/noticias/logo.png" alt="Volver al inicio">
+      </a>
+      <button type="button" class="notizam-pill" id="notizam-pill" title="Volver">
+        <span class="notizam-pill-circulo" aria-hidden="true">
+          <svg viewBox="0 0 24 24"><path d="M15 5 L8 12 L15 19" fill="none" stroke="#ffffff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </span>
+        <span class="notizam-pill-texto">Noti-Zam</span>
+      </button>
+    </header>
+
+    <div class="notizam-personaje marco-imagen" data-placeholder="personaje (img/noticias/personaje.png)">
+      <img src="img/noticias/personaje.png" alt="Presentador de Noti-Zam">
+    </div>
+
+
+<!-- ============== VISTA 1: portada de Noticias ============== -->
+<section class="notizam-vista" id="vista-intro" data-vista="intro">
+
+  <!-- Imagen completa de introducción -->
+  <img
+    class="notizam-portada-img"
+    src="img/noticias/intro-noticias.png"
+    alt="En las noticias de hoy, más problemas en el mundo del doblaje"
+  >
+
+  <!-- Botón invisible ubicado sobre la flecha violeta -->
+  <button
+    type="button"
+    class="notizam-portada-flecha"
+    id="caja-intro"
+    aria-label="Continuar a las noticias">
+  </button>
+
+</section>
+
+
+    <!-- ============== VISTA 2: hub de burbujas ============== -->
+    <section class="notizam-vista" id="vista-hub" data-vista="hub" hidden>
+      <div class="burbujas-noticias" id="burbujas-noticias">
+        <!-- generado por JS a partir de NOTICIAS -->
+      </div>
+    </section>
+
+    <!-- ============== VISTA 3: detalle de noticia (reutilizada) ============== -->
+    <section class="notizam-vista" id="vista-detalle" data-vista="detalle" hidden>
+      <div class="panel-noticia marco-imagen" id="panel-noticia" data-placeholder="ilustración de la noticia">
+        <img src="" alt="" id="panel-noticia-img">
+      </div>
+    </section>
+
+    <!-- ============== Pie: caption de la noticia activa ============== -->
+    <footer class="notizam-pie">
+      <div class="notizam-caption" id="notizam-caption" hidden>
+        <div class="notizam-caption-icono marco-imagen" id="caption-icono" data-placeholder="">
+          <img src="" alt="" id="caption-icono-img">
+          <button type="button" class="caption-audio" id="caption-audio" aria-label="Pausar audio">
+            <svg class="audio-icono-pausa" viewBox="0 0 24 24"><path d="M8 5v14M16 5v14" stroke="#fff" stroke-width="3.4" stroke-linecap="round"/></svg>
+            <svg class="audio-icono-play" viewBox="0 0 24 24" hidden><path d="M7 4.5v15l12-7.5z" fill="#fff" stroke="#fff" stroke-width="1.5" stroke-linejoin="round"/></svg>
+          </button>
+        </div>
+        <p id="caption-texto"></p>
+      </div>
+      <div class="notizam-pie-vacio" id="notizam-pie-vacio"></div>
+    </footer>
+
+  </div>
+
+  <audio id="notizam-audio" preload="auto"></audio>
+  <audio id="notizam-audio-intro" preload="auto"></audio>
+
+  <script src="noti-zam.js"></script>
+</body>
+</html>

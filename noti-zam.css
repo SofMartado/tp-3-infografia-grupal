@@ -1,0 +1,340 @@
+@import url('https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700;800&display=swap');
+
+/* =============================================================
+   NOTI-ZAM — pantalla intro + hub de burbujas + detalle de noticia
+   Todas las ilustraciones (fondo, personaje, íconos, paneles) son
+   PLACEHOLDERS: si el <img> no carga, se muestra un recuadro
+   punteado indicando qué archivo reemplazar. Al copiar la imagen
+   real en esa ruta, el placeholder desaparece solo.
+============================================================= */
+
+:root{
+  --nz-violeta-1:   #8b3ff0;
+  --nz-violeta-2:   #6420c9;
+  --nz-avatar:      #241a4d;
+  --nz-panel:       #3a2472;
+  --nz-panel-borde: #17111f;
+  --nz-barra-osc:   #2c2a30;
+  --nz-pie-claro:   #f8911b;
+  --nz-negro:       #141214;
+  --nz-blanco:      #f7f5fa;
+  --nz-fuente-caption: 'Baloo 2', 'Segoe UI', system-ui, sans-serif;
+}
+
+body.pagina-notizam{
+  --color-lateral: #16324a;
+  --fondo-lateral:
+    url('img/noticias/fondo-comic.png'),
+    radial-gradient(circle at 30% 20%, #26506b 0%, #16324a 45%, #0f2436 100%);
+  font-family: 'Segoe UI', system-ui, sans-serif;
+  color: var(--nz-blanco);
+}
+
+/* ===== Placeholders de imagen reutilizables ===== */
+.marco-imagen{ position:relative; overflow:hidden; }
+.marco-imagen img{
+  width:100%; height:100%;
+  object-fit: contain;
+  display:block;
+}
+.marco-imagen.sin-imagen img{ visibility:hidden; }
+.marco-imagen.sin-imagen::after{
+  content: attr(data-placeholder);
+  position:absolute; inset:0;
+  display:flex; align-items:center; justify-content:center;
+  text-align:center;
+  font-size: 11px;
+  line-height:1.4;
+  color:#cfc7e6;
+  padding: 6px;
+  border: 2px dashed rgba(53, 4, 4, 0.35);
+  border-radius: inherit;
+  background: rgba(63, 48, 83, 0.12);
+}
+
+/* =============================================================
+   Escenario (todas las pantallas de Noti-Zam viven acá adentro;
+   el tamaño a pantalla completa lo define pantalla.css)
+============================================================= */
+.escena-notizam{
+  /* tamaño y pantalla completa: pantalla.css (clase .escena) */
+}
+
+/* fondo con textura cómic — placeholder con degradé de respaldo */
+.notizam-fondo{
+  position:absolute; inset:0;
+  background:
+    url('img/noticias/fondo-comic.png') center/cover no-repeat,
+    radial-gradient(circle at 30% 20%, #26506b 0%, #16324a 45%, #0f2436 100%);
+}
+
+/* ===== Header: logo + píldora "Noti-Zam" ===== */
+.notizam-header{
+  position:absolute;
+  top: 1%; left: 1%;
+  height: 9.4%;
+  display:flex;
+  align-items:center;
+  gap: 0;
+  z-index: 40;
+}
+
+.notizam-logo{
+  height: 100%;
+  aspect-ratio: 1/1;
+  background: none;   /* sin fondo ni borde: se ve solo la imagen */
+  flex-shrink:0;
+}
+.notizam-logo::after{ font-size: 9px; }
+
+.notizam-pill{
+  display:flex;
+  align-items:center;
+  height: 100%;
+  margin-left: 14px;
+  padding: 0 26px 0 0;
+  border-radius: 999px;
+  border: 3px solid var(--nz-negro);
+  background: linear-gradient(180deg, var(--nz-violeta-1), var(--nz-violeta-2));
+  color: var(--nz-blanco);
+  font-weight: 700;
+  font-size: max(13px, calc(var(--u) * 1.6));
+  cursor: pointer;
+  box-shadow: 0 4px 0 rgba(0,0,0,.35);
+  transition: transform 160ms ease, filter 160ms ease;
+  overflow: hidden;
+}
+.notizam-pill:hover,
+.notizam-pill:focus-visible{ filter: brightness(1.08); transform: translateY(-2px); }
+
+.notizam-pill-circulo{
+  flex: 0 0 auto;
+  height: 100%;
+  aspect-ratio: 1/1;
+  border-radius: 50%;
+  background: var(--nz-avatar);
+  border-right: 3px solid var(--nz-negro);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  margin-right: 14px;
+}
+.notizam-pill-circulo svg{ width: 38%; height: 38%; }
+
+.notizam-pill-texto{ white-space: nowrap; }
+
+/* ===== Personaje (fijo en todas las vistas) ===== */
+.notizam-personaje{
+  position:absolute;
+  left: 13%;
+  bottom: 0;
+  width: 30%;
+  height: 64%;
+  z-index: 5;
+}
+.notizam-personaje img{ object-position: bottom; }
+
+/* =============================================================
+   Vistas (intro / hub / detalle) — se muestra una a la vez
+============================================================= */
+.notizam-vista{ position:absolute; inset:0; z-index: 8; }
+.notizam-vista[hidden]{ display:none; }
+
+
+/* ----- Portada de Noticias: imagen completa + flecha clickeable ----- */
+
+#vista-intro{
+  z-index: 30;
+}
+
+.notizam-portada-img{
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: fill;
+  display: block;
+}
+
+.notizam-portada-flecha{
+  position: absolute;
+
+  /* Posición de la flecha violeta sobre la imagen */
+  left: 79.8%;
+  top: 33.8%;
+  width: 6.2%;
+  height: 10.2%;
+
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background: transparent;
+
+  cursor: pointer;
+  z-index: 2;
+}
+
+.notizam-portada-flecha:hover,
+.notizam-portada-flecha:focus-visible{
+  outline: 3px solid rgba(255,255,255,.8);
+  outline-offset: 3px;
+}
+
+
+
+/* ----- Intro: recuadro clickeable ----- */
+.caja-intro{
+  position:absolute;
+  left: 46%; top: 22%;
+  width: 51%; height: 32%;
+  background: var(--nz-pie-claro);
+  border: none;
+  border-radius: 6px;
+  padding: 26px 30px;
+  text-align:left;
+  cursor:pointer;
+  box-shadow: 0 10px 30px rgba(0,0,0,.4);
+  transition: transform 160ms ease;
+}
+.caja-intro:hover, .caja-intro:focus-visible{ transform: translateY(-3px); }
+.caja-intro p{
+  margin:0;
+  font-family: var(--nz-fuente-caption);
+  font-weight: 800;
+  text-transform: uppercase;
+  color: var(--nz-negro);
+  font-size: max(16px, calc(var(--u) * 2.3));
+  line-height: 1.25;
+}
+.caja-intro-indicador{
+  position:absolute;
+  right: 18px; bottom: 12px;
+  font-size: 22px;
+  letter-spacing: 2px;
+  color: #6a6a6a;
+  animation: nz-parpadeo 1.4s infinite;
+}
+@keyframes nz-parpadeo{ 0%,100%{opacity:.3;} 50%{opacity:1;} }
+
+/* ----- Hub: burbujas de noticias ----- */
+.burbujas-noticias{ position:absolute; inset:0; }
+
+.burbuja-noticia{
+  position:absolute;
+  width: 9%;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  background:none;
+  border:none;
+  cursor:pointer;
+  color: inherit;
+  padding:0;
+}
+.burbuja-noticia .burbuja-circulo{
+  width:100%;
+  aspect-ratio: 1/1;
+  border-radius:50%;
+  background: var(--nz-panel);
+  border: 3px solid var(--nz-negro);
+  transition: transform 180ms ease, box-shadow 180ms ease;
+}
+.burbuja-noticia:hover .burbuja-circulo,
+.burbuja-noticia:focus-visible .burbuja-circulo{
+  transform: scale(1.1) translateY(-4px);
+  box-shadow: 0 10px 24px rgba(139,63,240,.6);
+}
+.burbuja-noticia .burbuja-etiqueta{
+  margin-top: 8px;
+  background: var(--nz-pie-claro);
+  color: var(--nz-negro);
+  font-family: var(--nz-fuente-caption);
+  font-weight: 800;
+  text-transform: uppercase;
+  font-size: max(9px, calc(var(--u) * 1));
+  line-height: 1.2;
+  text-align:center;
+  padding: 6px 10px;
+  border-radius: 4px;
+  white-space: nowrap;
+}
+
+/* ----- Detalle: panel de ilustración ----- */
+.panel-noticia{
+  position:absolute;
+  left: 41%; top: 10%;
+  width: 57%; height: 56%;
+  background: var(--nz-panel);
+  border: 4px solid var(--nz-panel-borde);
+  border-radius: 22px;
+  box-shadow: 0 14px 30px rgba(0,0,0,.4);
+}
+.panel-noticia img{ padding: 18px; }
+
+/* =============================================================
+   Pie: barra oscura + franja clara con ícono + copete
+============================================================= */
+.notizam-pie{
+  position:absolute;
+  left:0; right:0; bottom:0;
+  z-index: 15;
+}
+.notizam-pie::before{
+  content:"";
+  display:block;
+  height: calc(1080 / 1080 * 7.5%);
+  background: var(--nz-barra-osc);
+}
+.notizam-caption{
+  display:flex;
+  align-items:center;
+  gap: 22px;
+  min-height: 25%;
+  background: var(--nz-pie-claro);
+  padding: 18px 5%;
+}
+.notizam-caption[hidden]{ display:none; }
+.notizam-caption[hidden] + .notizam-pie-relleno{ }
+
+.notizam-caption-icono{
+  flex: 0 0 auto;
+  width: 8%;
+  aspect-ratio: 1/1;
+  border-radius: 50%;
+  background: #e6c0ff;
+  border: 2px solid #a630ca;
+}
+
+/* botón pausar/reproducir el audio, encima del ícono de la noticia */
+.caption-audio{
+  position:absolute; inset:22%;
+  border:none; border-radius:50%; cursor:pointer; padding:0;
+  background: rgba(20,18,20,.55);
+  display:flex; align-items:center; justify-content:center;
+  z-index:2;
+  transition: background 160ms ease, transform 160ms ease;
+}
+.caption-audio:hover,.caption-audio:focus-visible{ background: rgba(20,18,20,.8); transform: scale(1.08); }
+.caption-audio svg{ width:55%; height:55%; }
+.caption-audio svg[hidden]{ display:none; }
+.caption-audio.sin-audio{ opacity:.35; cursor:default; }   /* todavía no hay archivo de audio */
+
+.notizam-caption p{
+  margin:0;
+  font-family: var(--nz-fuente-caption);
+  font-weight: 800;
+  color: var(--nz-negro);
+  font-size: max(14px, calc(var(--u) * 2.1));
+  line-height: 1.3;
+}
+
+/* si no hay caption (intro / hub) dejamos la franja clara vacía */
+.notizam-pie-vacio{
+  min-height: 25%;
+  background: var(--nz-pie-claro);
+}
+
+@media (max-width: 640px){
+  .notizam-pill{ padding: 0 16px 0 0; }
+  .notizam-pill-circulo{ margin-right: 8px; }
+}

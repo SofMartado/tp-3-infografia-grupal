@@ -1,0 +1,81 @@
+/* =============================================================
+   HOME / HUB — "Voces Afanadas"
+   Pantalla principal ilustrada con 3 accesos: Noti-Zam, Trivia, ¡JUICIO!
+============================================================= */
+
+:root{
+  --hub-pared:        #5a4457;
+  --hub-pared-panel:  #4a3948;
+  --hub-madera:       #8a4a3a;
+  --hub-madera-osc:   #5f3226;
+  --hub-madera-clara: #a5583f;
+  --hub-piel-desk:    #e8a97a;
+  --hub-piel-desk-b:  #d99464;
+  --hub-negro:        #17151b;
+  --hub-violeta-1:    #8b3ff0;
+  --hub-violeta-2:    #6420c9;
+  --hub-avatar:       #241a4d;
+  --hub-blanco:       #fbf7f9;
+  --hub-radio-pill:   999px;
+}
+
+body.pagina-hub{
+  --color-lateral: #54424f;
+  --fondo-lateral: url("img/hub/hub-inicio.png");
+  font-family: 'Segoe UI', system-ui, sans-serif;
+  color: var(--hub-blanco);
+}
+
+/* ===== Escenario ilustrado (tamaño y pantalla completa: pantalla.css) ===== */
+
+.escena-hub-img{
+  position:absolute;
+  inset:0;
+  width:100%;
+  height:100%;
+  display:block;
+  object-fit: cover;
+}
+
+/* ===== Botones / accesos — solo texto, sin íconos ===== */
+.hub-boton{
+  position:absolute;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  height: 9.2%;
+  min-height: 40px;
+  border-radius: var(--hub-radio-pill);
+  background: linear-gradient(180deg, var(--hub-violeta-1), var(--hub-violeta-2));
+  border: 3px solid var(--hub-negro);
+  box-shadow: 0 6px 0 rgba(0,0,0,.35), 0 10px 24px rgba(0,0,0,.4);
+  text-decoration:none;
+  color: var(--hub-blanco);
+  cursor:pointer;
+  transition: transform 180ms ease, box-shadow 180ms ease, filter 180ms ease;
+  overflow:hidden;
+  padding: 0 26px;
+  font-weight: 700;
+  font-size: max(13px, calc(var(--u) * 1.5));
+  white-space: nowrap;
+  letter-spacing: .3px;
+}
+.hub-boton:hover,
+.hub-boton:focus-visible{
+  transform: translateY(-4px) scale(1.035);
+  box-shadow: 0 10px 0 rgba(0,0,0,.35), 0 18px 34px rgba(139,63,240,.55);
+  filter: brightness(1.08);
+}
+.hub-boton:active{
+  transform: translateY(0) scale(0.98);
+  box-shadow: 0 3px 0 rgba(0,0,0,.35);
+}
+
+/* posiciones relativas a la escena (coinciden con la referencia) */
+#btn-notizam{ left: 5.5%;  top: 7.5%;  width: 24%; }
+#btn-trivia { left: 37.5%; top: 59.5%; width: 24%; }
+#btn-juicio { left: 52.5%; top: 87.5%; width: 24%; }
+
+@media (max-width: 640px){
+  .hub-boton .hub-etiqueta{ padding: 0 14px; }
+}

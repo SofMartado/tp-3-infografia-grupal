@@ -1,0 +1,112 @@
+@import url('https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700;800&display=swap');
+
+/* JUICIO — 2 pantallas: elegir uno de 3 temas / animación de frames + botón final.
+   Todo se posiciona en % de la escena 16:9 (referencias de 1920x1080), igual que
+   Noti-Zam y Trivia. Los frames de cada animación son placeholders: ver
+   img/juicio/frames/LEEME.txt para los nombres exactos que hay que ir agregando. */
+
+:root{
+  --jc-morado:  #2f1a68;
+  --jc-violeta: #8b3ff0;
+  --jc-negro:   #17101f;
+  --jc-fuente:  'Baloo 2', 'Segoe UI', system-ui, sans-serif;
+}
+
+body.pagina-juicio{
+  --color-lateral: #2a2438;
+  --fondo-lateral: url('img/juicio/fondo-opciones.png'), radial-gradient(circle at 30% 20%, #4a3a5c 0%, #2a2438 70%);
+  font-family: var(--jc-fuente);
+  color:#fff;
+}
+
+/* encabezado igual al de Noti-Zam y Trivia: esquina superior izquierda, alto 9.4% */
+.juicio-header{ position:absolute; top:1%; left:1%; height:9.4%; display:flex; align-items:center; z-index:20; }
+.juicio-microfono{ height:100%; aspect-ratio:1/1; flex-shrink:0; }
+.juicio-pill{
+  height:100%; width:calc(var(--u) * 13); margin-left:14px; flex-shrink:0;
+  display:flex; align-items:center; padding:0; overflow:hidden; cursor:pointer;
+  border:3px solid var(--jc-negro); border-radius:999px;
+  background: var(--jc-violeta); color:#fff;
+  font: 600 max(13px, calc(var(--u) * 1.6)) var(--jc-fuente);
+  transition: transform 160ms ease, filter 160ms ease;
+}
+.juicio-pill:hover,.juicio-pill:focus-visible{ filter:brightness(1.1); transform:translateY(-2px); }
+.juicio-pill-circulo{
+  height:100%; aspect-ratio:1/1; border-radius:50%; background: var(--jc-morado);
+  display:flex; align-items:center; justify-content:center; margin-right:5%;
+}
+.juicio-pill-circulo svg{ width:50%; height:50%; }
+
+.juicio-vista{ position:absolute; inset:0; z-index:8; }
+.juicio-vista[hidden]{ display:none; }
+
+/* ===== Pantalla 1: los 3 temas ===== */
+.juicio-fondo-opciones{ position:absolute; inset:0; z-index:1; }
+.juicio-fondo-opciones img{ object-fit:cover; }
+
+/* burbujas con el texto de cada tema (posiciones aproximadas a la referencia en Figma;
+   ajustalas si tu ilustración de fondo ubica al robot/juez/chico en otro lugar) */
+.juicio-tema{
+  position:absolute; z-index:9;
+  background:#fff; color:var(--jc-negro);
+  border: 3px solid var(--jc-negro); border-radius: calc(var(--u) * 8);
+  padding: 2% 4%;
+  font: 700 max(13px, calc(var(--u) * 1.9)) / 1.15 var(--jc-fuente);
+  text-transform: uppercase; text-align:left; cursor:pointer;
+  transition: transform 160ms ease, filter 160ms ease;
+}
+.juicio-tema:hover,.juicio-tema:focus-visible{ transform:scale(1.03); filter:brightness(.96); }
+#tema-0{ left:2%;    top:76%;  width:36%; }   /* 1. Derechos de autor y propiedad intelectual */
+#tema-1{ left:60%;   top:38%;  width:33%; }   /* 2. Difamación y uso legítimo */
+#tema-2{ left:33%;   top:2%;   width:33%; }   /* 3. Consentimiento y privacidad */
+
+/* ===== Pantalla 2: animación de frames ===== */
+.juicio-frame{ position:absolute; inset:0; z-index:1; }
+.juicio-frame img{ object-fit:cover; }
+
+.juicio-fin{
+  position:absolute; left:29.5%; top:74.8%; width:41%; height:14%;
+  background: var(--jc-morado); color:#fff; border:none; cursor:pointer;
+  border-radius: calc(var(--u) * 3);
+  font: 700 max(16px, calc(var(--u) * 2.6)) / 1.15 var(--jc-fuente);
+  text-align:center; z-index:12;
+  transition: transform 160ms ease, filter 160ms ease;
+}
+.juicio-fin[hidden]{ display:none; }
+.juicio-fin:hover,.juicio-fin:focus-visible{ transform:scale(1.03); filter:brightness(1.1); }
+
+/* burbujas de bifurcación (2 opciones): imágenes redondas que el usuario clickea.
+   Posiciones aproximadas a la referencia (una a cada lado, arriba); ajustalas si
+   tu ilustración ubica la pregunta en otro lugar. */
+.juicio-bifurcacion{
+  position:absolute; top:12%; width:20%; aspect-ratio:1/1; z-index:13;
+  padding:0; border:none; border-radius:50%; cursor:pointer; background:transparent;
+  transition: transform 160ms ease, filter 160ms ease;
+}
+.juicio-bifurcacion[hidden]{ display:none; }
+.juicio-bifurcacion img{ border-radius:50%; }
+.juicio-bifurcacion:hover,.juicio-bifurcacion:focus-visible{ transform:scale(1.05); filter:brightness(1.08); }
+#juicio-opcion-0{ left:5%; }
+#juicio-opcion-1{ right:5%; }
+
+
+/* Flecha transparente superpuesta a la flecha fucsia/violeta dibujada
+   dentro del globo de diálogo de las pantallas manuales. */
+.juicio-flecha-manual{
+  position:absolute;
+  left:57.5%;
+  top:84%;
+  width:8%;
+  height:12%;
+  z-index:15;
+  border:0;
+  padding:0;
+  background:transparent;
+  cursor:pointer;
+}
+.juicio-flecha-manual[hidden]{ display:none; }
+.juicio-flecha-manual:focus-visible{
+  outline:3px solid var(--jc-violeta);
+  outline-offset:2px;
+  border-radius:50%;
+}

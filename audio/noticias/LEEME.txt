@@ -1,0 +1,12 @@
+Audios de las noticias de Noti-Zam (uno por noticia, formato mp3):
+  doblaje-ia.mp3
+  ley-ia.mp3
+  leyes-mundiales.mp3
+  batalla-ia.mp3
+  ley-elvis.mp3
+  voces-actores.mp3
+  manifestaciones.mp3
+Se reproducen solos al abrir la noticia. Si falta alguno, el botón de pausa se ve atenuado.
+
+Pantalla de inicio de Noti-Zam ("En las noticias de hoy..."): intro.mp3
+(suena solo al llegar a esa pantalla; no tiene botón de pausa)

@@ -1,0 +1,185 @@
+@import url('https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@600;700&display=swap');
+
+/* TRIVIA — 3 pantallas: intro / pregunta con audio / imagen fija con el audio de la respuesta.
+   Todo se posiciona en % de la escena 16:9 (referencias de 1920x1080). */
+
+:root{
+  --tv-morado:  #2f1a68;
+  --tv-violeta: #8b3ff0;
+  --tv-negro:   #17101f;
+  --tv-naranja: #ff5a1f;
+  --tv-verde:   #3a9a4b;
+  --tv-rojo:    #c42a12;
+  --boton-pregnante:   #bb0fff;
+  --tv-fuente:  'Josefin Sans', 'Segoe UI', system-ui, sans-serif;
+}
+
+body.pagina-trivia{
+  --color-lateral: #2a2438;
+  --fondo-lateral: url('img/trivia/fondo-juego.png'), radial-gradient(circle at 30% 20%, #4a3a5c 0%, #2a2438 70%);
+  font-family: var(--tv-fuente);
+  color: #fff;
+}
+
+/* fondos: imagen real + degradé de respaldo hasta que la agregues */
+.trivia-fondo{ position:absolute; inset:0; background-size:cover; background-position:center; }
+.fondo-intro{ background-image: url('img/trivia/fondo-juego.png'), radial-gradient(circle at 30% 20%, #4a3a5c 0%, #2a2438 70%); }
+.fondo-juego{ background-image: url('img/trivia/fondo-juego.png'), radial-gradient(circle at 30% 20%, #4a3a5c 0%, #2a2438 70%); }
+[data-vista="intro"] .fondo-juego,
+[data-vista="juego"] .fondo-intro,
+[data-vista="resultado"] .fondo-intro{ display:none; }
+
+/* ilustraciones */
+/* encabezado igual al de Noti-Zam: esquina superior izquierda, alto 9.4% */
+.trivia-header{ position:absolute; top:1%; left:1%; height:9.4%; display:flex; align-items:center; z-index:20; }
+.trivia-microfono{ height:100%; aspect-ratio:1/1; flex-shrink:0; }
+.trivia-burbujas{ position:absolute; left:0; bottom:0; width:10%; height:25%; z-index:5; }
+.trivia-personaje{ position:absolute; z-index:5; }
+.trivia-personaje img{ object-position: bottom right; }
+.personaje-intro{ left:60.9%; top:8.8%; width:38.5%; height:91.2%; }
+.personaje-juego{ left:77.5%; top:41%; width:22%; height:59%; }
+[data-vista="intro"] .personaje-juego,
+[data-vista="juego"] .personaje-intro,
+[data-vista="juego"] .trivia-burbujas,
+[data-vista="resultado"] .personaje-intro,
+[data-vista="resultado"] .trivia-burbujas{ display:none; }
+
+/* píldora volver */
+.trivia-pill{
+  height:100%; width:calc(var(--u) * 13); margin-left:14px; flex-shrink:0;
+  display:flex; align-items:center; padding:0; overflow:hidden; cursor:pointer;
+  border:3px solid var(--tv-negro); border-radius:999px;
+  background: var(--tv-violeta); color:#fff;
+  font: 600 max(13px, calc(var(--u) * 1.6)) var(--tv-fuente);
+  transition: transform 160ms ease, filter 160ms ease;
+}
+.trivia-pill:hover,.trivia-pill:focus-visible{ filter:brightness(1.1); transform:translateY(-2px); }
+.trivia-pill-circulo{
+  height:100%; aspect-ratio:1/1; border-radius:50%; background: var(--tv-morado);
+  display:flex; align-items:center; justify-content:center; margin-right:5%;
+}
+.trivia-pill-circulo svg{ width:50%; height:50%; }
+
+.trivia-vista{ position:absolute; inset:0; z-index:8; }
+.trivia-vista[hidden]{ display:none; }
+
+/* intro */
+.trivia-intro{
+  position:absolute; left:4.4%; top:30.5%; width:49.5%; height:45%;
+  background: var(--tv-morado); color:#fff; border:none; cursor:pointer;
+  border-radius: calc(var(--u) * 12);
+  padding: 0 5%;
+  font: 700 calc(var(--u) * 4.7) / 1.1 var(--tv-fuente);
+  text-transform: uppercase; text-align:center;
+  transition: transform 180ms ease, filter 180ms ease;
+}
+.trivia-intro:hover,.trivia-intro:focus-visible{ transform:scale(1.02); filter:brightness(1.12); }
+
+/* tarjeta de pregunta + reproductor */
+.trivia-tarjeta{ position:absolute; left:28.5%; top:25.6%; width:42.9%; height:28.5%; display:flex; flex-direction:column; }
+.trivia-tarjeta[hidden]{ display:none; }
+.trivia-pregunta{
+  flex:1; margin:0; background:var(--tv-morado);
+  display:flex; align-items:center; justify-content:center; text-align:center;
+  padding:0 6%; font: 600 max(15px, calc(var(--u) * 2)) / 1.25 var(--tv-fuente);
+}
+/* esquinas superiores rectas (se funde con el cuadro de texto); abajo, semicírculo = la mitad del alto */
+.trivia-reproductor{
+  height:32.5%; display:flex; background:var(--tv-morado); overflow:hidden;
+  margin-top:-1px;   /* evita una línea fina entre ambos por redondeo de píxeles */
+  border-radius: 0 0 calc(var(--u) * 2.6) calc(var(--u) * 2.6);
+}
+.trivia-play{
+  flex:0 0 auto; height:100%; aspect-ratio:1/1; border:none; border-radius:50%; cursor:pointer;
+  background:var(--tv-violeta); display:flex; align-items:center; justify-content:center;
+  transition: filter 160ms ease;
+}
+.trivia-play:hover,.trivia-play:focus-visible{ filter:brightness(1.15); }
+.trivia-play svg{ width:48%; height:48%; }
+.trivia-play svg[hidden]{ display:none; }
+.trivia-ondas{
+  position:relative; flex:1; margin:0 8.5% 0 3%; cursor:pointer;
+  display:flex; align-items:center; justify-content:space-between;
+}
+.trivia-ondas .barra{ width:.55%; min-width:2px; background:var(--tv-naranja); border-radius:2px; }
+.trivia-cabezal{
+  position:absolute; top:6%; bottom:6%; left:0; width:3px; margin-left:-1.5px;
+  background:var(--tv-naranja); border-radius:2px; pointer-events:none;
+}
+.trivia-cabezal::after{
+  content:""; position:absolute; left:50%; top:50%; width:calc(var(--u) * 1.5); aspect-ratio:1/1;
+  transform:translate(-50%,-50%); border-radius:50%; background:var(--tv-naranja);
+}
+
+/* imagen fija (suena de fondo el audio de la respuesta) */
+.trivia-imagen{
+  position:absolute; left:28.5%; top:21.2%; width:42.9%; aspect-ratio: 823 / 496;
+  background:var(--tv-morado); padding:2.2%;
+}
+.trivia-imagen[hidden]{ display:none; }
+.trivia-imagen img{ width:100%; height:100%; object-fit:cover; display:block; }
+.trivia-imagen.sin-imagen::after{ content: attr(data-placeholder); }
+.trivia-etiqueta{
+  position:absolute; left:3.3%; top:7.9%; width:23.3%; height:10.9%;
+  display:flex; align-items:center; justify-content:center;
+  border:3px solid var(--tv-negro); border-radius:999px; background:var(--tv-violeta);
+  font: 600 max(14px, calc(var(--u) * 2)) var(--tv-fuente); pointer-events:none;
+}
+
+/* flecha siguiente */
+.trivia-siguiente{
+  position:absolute; left:73.5%; top:38.4%; width:6.6%; aspect-ratio:1/1;
+  border:3px solid var(--tv-negro); border-radius:50%; background:var(--boton-pregnante); cursor:pointer;
+  display:flex; align-items:center; justify-content:center; z-index:9;
+  transition: transform 160ms ease, filter 160ms ease;
+}
+.trivia-siguiente[hidden]{ display:none; }
+.trivia-siguiente svg{ width:56%; height:56%; }
+.trivia-siguiente:hover,.trivia-siguiente:focus-visible{ transform:scale(1.08); filter:brightness(1.2); }
+
+/* botones REAL / CLONADA */
+.trivia-opcion{
+  position:absolute; top:74.8%; width:24.1%; height:9.2%;
+  border:3px solid var(--tv-negro); border-radius:999px; background:var(--tv-morado); color:#fff;
+  font: 600 max(16px, calc(var(--u) * 2.4)) var(--tv-fuente); text-transform:uppercase; cursor:pointer;
+  transition: transform 160ms ease, filter 160ms ease, background 160ms ease;
+}
+#opcion-real{ left:21.6%; }
+#opcion-clonada{ left:52.7%; }
+.trivia-opcion:not(:disabled):hover,.trivia-opcion:not(:disabled):focus-visible{ transform:translateY(-3px); filter:brightness(1.2); }
+.trivia-opcion:disabled{ cursor:default; }
+.trivia-opcion.correcta{ background:var(--tv-verde); }
+.trivia-opcion.incorrecta{ background:var(--tv-rojo); }
+
+/* pantalla final: cuántas acertó + mensaje según el puntaje (los textos están en MENSAJES, trivia.js) */
+.trivia-resultado{
+  position:absolute; left:28.5%; top:27.1%; width:42.9%; height:29.1%;
+  background:var(--tv-morado);
+  display:flex; flex-direction:column; align-items:center; justify-content:space-around;
+  text-align:center; padding:0 6%;
+}
+.trivia-resultado-titulo{ margin:0; font: 700 max(18px, calc(var(--u) * 2.4)) / 1.2 var(--tv-fuente); }
+.trivia-resultado-texto{ margin:0; font: 600 max(15px, calc(var(--u) * 2.1)) / 1.25 var(--tv-fuente); }
+#trivia-inicio{ left:38.5%; top:72%; text-transform:none; }
+
+/* PERSONAJE CON DIÁLOGO EN LA PANTALLA DE RESPUESTA */
+
+.trivia-respuesta-personaje {
+  position: absolute;
+  right: 0.5%;
+  top: 10%;
+  width: 50%;
+  height: auto;
+  z-index: 12;
+  pointer-events: none;
+  object-fit: contain;
+}
+
+.trivia-respuesta-personaje[hidden] {
+  display: none;
+}
+
+/* Oculta el personaje original mientras aparece el personaje con diálogo */
+#app-trivia.mostrando-respuesta .personaje-juego {
+  display: none;
+}
