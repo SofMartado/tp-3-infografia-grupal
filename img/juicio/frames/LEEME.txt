@@ -1,0 +1,39 @@
+Frames de las animaciones de ¡JUICIO! (uno por tema, en orden):
+
+  Tema 1 — Derechos de autor y propiedad intelectual:
+    tema1_1.png, tema1_2.png, tema1_3.png, tema1_4.png, tema1_5.png
+
+  Tema 2 — Difamación y uso legítimo:
+    tema2_1.png, tema2_2.png, tema2_3.png, tema2_4.png, tema2_5.png
+
+  Tema 3 — Consentimiento y privacidad (esta tiene una bifurcación: al llegar al
+  frame 8 aparecen 2 burbujas para elegir, y la animación sigue por una rama distinta
+  según cuál se toque):
+    Frames comunes, antes de la pregunta:
+      tema3_1.png ... tema3_8.png
+    Las 2 burbujas de opción (aparecen sobre el frame 8, una a cada lado):
+      tema3-opcion-si.png   (la burbuja con el visto verde)
+      tema3-opcion-no.png   (la burbuja con la cruz roja)
+    Rama si se elige la burbuja del visto verde:
+      tema3_si_1.png ... tema3_si_5.png
+    Rama si se elige la burbuja de la cruz roja:
+      tema3_no_1.png ... tema3_no_5.png
+
+Si cambia la cantidad de frames comunes o de alguna rama del tema 3, ajustá los
+"numFrames" correspondientes en la lista TEMAS al principio de juicio.js (mirá el
+comentario "bifurcacion" ahí). Las burbujas se pueden reposicionar en juicio.css,
+en las reglas ".juicio-bifurcacion", "#juicio-opcion-0" y "#juicio-opcion-1".
+
+Se muestran en orden, uno cada 700 ms (aprox.), como una animación de pocos
+cuadros. El último frame de cada tema es el que se queda en pantalla junto
+con el botón "¡Fin del Juicio!" (por ejemplo, la escena del juez con el
+veredicto), así que conviene que sea una imagen que quede bien "en pausa".
+
+Si una animación necesita más o menos frames, cambiá "numFrames" en la lista
+TEMAS al principio de juicio.js. La velocidad se ajusta en MS_POR_FRAME, en
+el mismo archivo.
+
+Otras imágenes:
+  img/juicio/microfono.png        (mismo ícono que en Noti-Zam y Trivia)
+  img/juicio/fondo-opciones.png   (ilustración de fondo de la pantalla con
+                                   los 3 temas: el robot, el juez y el chico)
