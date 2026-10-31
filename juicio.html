@@ -13,6 +13,14 @@
 
     <!-- Encabezado: micrófono + píldora, misma posición/tamaño que en Noti-Zam y Trivia -->
     <header class="juicio-header">
+      <button
+  type="button"
+  class="juicio-sonido"
+  id="juicio-sonido"
+  aria-label="Apagar sonido"
+  title="Apagar sonido">
+  ♫
+</button>
       <div class="juicio-microfono marco-imagen" data-placeholder="micrófono (img/juicio/microfono.png)"><img src="img/juicio/microfono.png" alt=""></div>
       <button type="button" class="juicio-pill" id="juicio-pill" title="Volver">
         <span class="juicio-pill-circulo" aria-hidden="true">
@@ -20,6 +28,7 @@
         </span>
         <span id="juicio-pill-texto">¡Juicio!</span>
       </button>
+      
     </header>
 
     <!-- PANTALLA 0: elegir uno de los 3 temas -->
@@ -34,13 +43,7 @@
     </section>
 
     <!-- PANTALLA 01-tema1: pantalla roboti-noti presentando el caso + botón final -->
-     <button
-  type="button"
-  class="juicio-flecha-manual"
-  id="juicio-flecha-manual"
-  aria-label="Avanzar a la siguiente pantalla"
-  hidden>
-    </button>
+
 
     <!-- PANTALLA 2: animación de frames del tema elegido + botón final -->
     <section class="juicio-vista" id="vista-animacion" hidden>

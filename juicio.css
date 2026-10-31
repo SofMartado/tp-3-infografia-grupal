@@ -110,3 +110,47 @@ body.pagina-juicio{
   outline-offset:2px;
   border-radius:50%;
 }
+
+
+/* ===== Botón de sonido de Juicio ===== */
+
+.juicio-sonido{
+  position:absolute;
+  top:120%;
+  right:75%;
+  z-index:2%;
+
+  width:calc(var(--u) * 4.5);
+  height:calc(var(--u) * 4.5);
+  min-width:34px;
+  min-height:34px;
+
+  border:2px solid var(--jc-negro);
+  border-radius:50%;
+
+  background:#fff;
+  color:var(--jc-morado);
+
+  font-size:calc(var(--u) * 2.2);
+  font-weight:800;
+
+  display:flex;
+  align-items:center;
+  justify-content:center;
+
+  cursor:pointer;
+  box-shadow:0 2px 5px rgba(0,0,0,.25);
+
+  transition:transform .15s ease, background .15s ease;
+}
+
+.juicio-sonido:hover{
+  transform:scale(1.08);
+  background:#f19137;
+}
+
+.juicio-sonido:focus-visible{
+  outline:3px solid var(--jc-violeta);
+  outline-offset:3px;
+}
+

@@ -70,7 +70,102 @@
   const MS_POR_FRAME = 1800;   // velocidad de la animación (más bajo = más rápido)
   const URL_INICIO_SITIO = "index.html";
 
+  
+// =================================================
+// AUDIO DE JUICIO
+// =================================================
+
+// Rutas de los cuatro audios agregados.
+const AUDIO_JUICIO = {
+  murmullos: "audio/juicio/murmullos.mp3",
+  martillo: "audio/juicio/martillo-juez.mp3",
+  musicaIntro: "audio/juicio/musica-intro.mp3",
+  cierre: "audio/juicio/cierre-noti-zam.mp3"
+};
+
+// NUEVAS VARIABLES:
+// Guardan el estado del sonido y el audio de fondo actual.
+let sonidoActivado = true;
+let fondoActual = "";
+let volumenFondoActual = 0.10;
+
+// Reproductores separados para evitar que los efectos
+// interrumpan la música de fondo.
+const audioFondo = new Audio();
+audioFondo.loop = true;
+audioFondo.preload = "auto";
+
+const audioEfecto = new Audio();
+audioEfecto.preload = "auto";
+
+// Reproduce o cambia la música de fondo.
+function cambiarFondoAudio(ruta, volumen) {
+
+  fondoActual = ruta;
+  volumenFondoActual = volumen;
+
+  if (audioFondo.getAttribute("src") !== ruta) {
+    audioFondo.pause();
+    audioFondo.src = ruta;
+    audioFondo.load();
+  }
+
+  audioFondo.loop = true;
+  audioFondo.volume = volumen;
+
+  if (sonidoActivado) {
+    audioFondo.play().catch(() => {});
+  }
+}
+
+// Reproduce sonidos cortos, como el martillo del juez.
+function reproducirEfectoAudio(ruta, volumen = 0.50) {
+
+  if (!sonidoActivado) return;
+
+  audioEfecto.pause();
+  audioEfecto.currentTime = 0;
+  audioEfecto.src = ruta;
+  audioEfecto.loop = false;
+  audioEfecto.volume = volumen;
+
+  audioEfecto.play().catch(() => {});
+}
+
+
+
+
   const $ = (id) => document.getElementById(id);
+  // Botón para activar y desactivar todos los sonidos.
+const btnSonido = $("juicio-sonido");
+
+btnSonido.addEventListener("click", () => {
+
+  sonidoActivado = !sonidoActivado;
+
+  if (!sonidoActivado) {
+
+    audioFondo.pause();
+    audioEfecto.pause();
+
+    btnSonido.textContent = "×";
+    btnSonido.title = "Activar sonido";
+    btnSonido.setAttribute("aria-label", "Activar sonido");
+
+  } else {
+
+    btnSonido.textContent = "♫";
+    btnSonido.title = "Apagar sonido";
+    btnSonido.setAttribute("aria-label", "Apagar sonido");
+
+    // Recupera la música correspondiente a la pantalla actual.
+    if (fondoActual) {
+      audioFondo.volume = volumenFondoActual;
+      audioFondo.play().catch(() => {});
+    }
+  }
+
+});
   const app = $("app-juicio");
   const vOpciones = $("vista-opciones"), vAnimacion = $("vista-animacion");
   const frameWrap = $("juicio-frame"), frameImg = $("juicio-frame-img");
@@ -98,6 +193,8 @@
 
   function mostrarOpciones() {
     clearInterval(temporizador);
+    // Murmullos de personas en la pantalla inicial.
+cambiarFondoAudio(AUDIO_JUICIO.murmullos, 0.10);
     alAvanzarPantallaManual = null;
     btnFlechaManual.hidden = true;
     app.dataset.vista = "opciones";
@@ -146,7 +243,15 @@
 // La flecha permite avanzar entre ellas.
 // El botón Fin del Juicio aparece únicamente en la última.
 
+
+// =================================================
+// PANTALLAS FINALES DE JUICIO
+// =================================================
+
 function mostrarFinales(finales) {
+
+  // Música de cierre durante las pantallas finales.
+  cambiarFondoAudio(AUDIO_JUICIO.cierre, 0.12);
 
   if (!finales || !finales.length) {
     btnFin.hidden = false;
@@ -156,25 +261,25 @@ function mostrarFinales(finales) {
   function mostrarFinal(indice) {
 
     mostrarPantallaManual(finales[indice], () => {
-
       mostrarFinal(indice + 1);
-
     });
 
-    // Si es la última imagen, ocultamos la flecha
-    // y mostramos el botón Fin del Juicio.
+    // Si llegamos a la última imagen:
     if (indice === finales.length - 1) {
 
       btnFlechaManual.hidden = true;
       btnFin.hidden = false;
       alAvanzarPantallaManual = null;
 
+      // Sonido del juez en la última pantalla.
+      reproducirEfectoAudio(AUDIO_JUICIO.martillo, 0.50);
     }
-
   }
 
+  // Comienza por la primera pantalla final.
   mostrarFinal(0);
 }
+
 
   function mostrarBifurcacion(bifurcacion) {
     bifurcacion.opciones.forEach((op, i) => {
@@ -195,6 +300,13 @@ function mostrarFinales(finales) {
   function mostrarAnimacion(indice) {
     temaActual = indice;
     const t = TEMAS[temaActual];
+
+    // Golpe del martillo al seleccionar el tema.
+reproducirEfectoAudio(AUDIO_JUICIO.martillo, 0.50);
+
+// Música de noticias para las pantallas 00 y 01.
+cambiarFondoAudio(AUDIO_JUICIO.musicaIntro, 0.12);
+
     pillTexto.textContent = "Juicio";
     btnFin.hidden = true;
     btnFlechaManual.hidden = true;
@@ -203,6 +315,9 @@ function mostrarFinales(finales) {
     vOpciones.hidden = true; vAnimacion.hidden = false;
 
     function iniciarAnimacion() {
+      // Al comenzar la animación, cambia a los murmullos suaves.
+cambiarFondoAudio(AUDIO_JUICIO.murmullos, 0.06);
+
       reproducirSecuencia(t.ruta, t.numFrames, () => {
         if (t.bifurcacion) mostrarBifurcacion(t.bifurcacion);
         else mostrarFinales(t.finales);
@@ -233,4 +348,11 @@ function mostrarFinales(finales) {
   });
 
   mostrarOpciones();
+  // Permite iniciar el audio cuando el navegador
+// habilita la reproducción después de la primera interacción.
+document.addEventListener("pointerdown", () => {
+  if (sonidoActivado && fondoActual && audioFondo.paused) {
+    audioFondo.play().catch(() => {});
+  }
+}, { once: true });
 })();
